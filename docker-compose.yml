@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: IP2LOCATION-LITE-DB5
+      MYSQL_ROOT_PASSWORD: MaksymV
+    ports:
+      - "3306:3306"
+
+  web:
+    build: .
+    restart: always
+    depends_on:
+      - "db"
+    ports:
+      - "8080:8080"
+    links:
+      - "db:localhost"
